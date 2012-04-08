@@ -1,0 +1,42 @@
+Search series and display episodes by IMDB-series-id / TheTvDb.com Id
+Supporting Multiple Formats
+JSON
+JSONP
+XML
+
+Search For TV-Series
+http://series-ortiz.rhcloud.com/series?name=dexter
+
+A search returns series information and a IMDB-id encapsulated by the id property or xml tag.
+How To Work With The Search Result
+Use the id to get additional tv-series information and seasons/episodes. The above query for the tv-series dexter returns the IMDB-id "tt0773262"
+Note Search results won't be cached and therefore searching can be slower than retrieving a tv-series directly by id
+Now use the IMDB-id to get the storyline and the number of seasons:
+
+http://series-ortiz.rhcloud.com/series/tt0773262/info
+
+Or to get the episodes of a season:
+
+http://series-ortiz.rhcloud.com/series/tt0773262/season/1
+
+Or even get all episodes of the tv-series:
+
+http://series-ortiz.rhcloud.com/series/tt0773262
+
+Unstable Dependig on the number of seasons full series requests may take a bit to long. Openshift in connection with Play! seems to return a "502 Proxy Error" if requests takes longer than ~30 seconds. Try using the "series-id/season/number" URL instead
+Caching
+TV-Series information will be cached after a request for a day. The most popular tv-series will be cached on a daily basis.
+Data Formats
+Every request returns JSON data by default, if you want to see the result in XML format, just add a .xml before the query string, as follows:
+
+http://series-ortiz.rhcloud.com/series.xml?name=dexter
+
+If you want to use the resulting data over JSONP just add a "callback" parameter to the query string:
+
+http://series-ortiz.rhcloud.com/series?name=dexter&callback=func
+
+In this case func is the callback function.
+
+TheTVDB.com Wrapper New!
+The IMDB Series API does now support querying for TheTVDB.com entries. You only have to append s=thetvdb to the query string, to specify the service.
+Example: http://series-ortiz.rhcloud.com/series?name=dexter&callback=func&s=thetvdb

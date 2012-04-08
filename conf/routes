@@ -1,0 +1,25 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+GET     /series/{id}/season/{number}\.xml        Application.getSeriesSeason(format:'xml')
+GET     /series/{id}/season/{number}            Application.getSeriesSeason(format:'json')
+
+GET     /series/{id}/info\.xml                   Application.getSeriesInfoById(format:'xml')
+GET     /series/{id}/info                       Application.getSeriesInfoById(format:'json')
+
+GET     /series/{id}\.xml                        Application.getSeriesById(format:'xml')
+GET     /series/{id}                            Application.getSeriesById(format:'json')
+
+GET     /series\.xml                             Application.searchSeries(format:'xml')
+GET     /series                                 Application.searchSeries(format:'json')
+
+GET     /                                       Info.index
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}
