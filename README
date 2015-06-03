@@ -1,3 +1,6 @@
+IMDB Support has been discarded.
+Work with the "?s=thetvdb" - URL - Suffix to get the examples working.
+
 Search series and display episodes by IMDB-series-id / TheTvDb.com Id
 Supporting Multiple Formats
 JSON
