@@ -25,6 +25,7 @@ import play.cache.Cache;
  *
  * @author Christian
  */
+@Deprecated
 public class ImdbSeriesService implements SeriesService {
 
     public List<Series> searchSeries(String query) {
@@ -99,7 +100,7 @@ public class ImdbSeriesService implements SeriesService {
             try {
                 series.toYear = Integer.parseInt(fromToString.split("\\(")[1].split("[^\\d]")[1]);
             } catch (Exception e) {
-                // Nothing 
+                // Nothing
             }
             series.storyline = page.select(".article > h2:contains(Storyline)").first().parent().getElementsByTag("p").first().text();
             int i = series.storyline.lastIndexOf("Written by");
@@ -111,14 +112,14 @@ public class ImdbSeriesService implements SeriesService {
             Elements seasonLinks = page.select("div.article > div.txt-block").first().select("span a");
 
             if (seasonLinks.select(":contains(See more)").size() > 0) {
-                
-                Document episodePage = Jsoup.parse(UrlHelper.getTextByUrl("http://www.imdb.com/title/" + id + "/episodes")); 
+
+                Document episodePage = Jsoup.parse(UrlHelper.getTextByUrl("http://www.imdb.com/title/" + id + "/episodes"));
                 Element seasonSelect = episodePage.getElementById("bySeason");
-                
+
                 for (Element optionElement : seasonSelect.children()) {
                     int number = Integer.parseInt(optionElement.attr("value"));
                     Season season = null;
-                    
+
                     if (withEpisodes) {
                         season = getSeason(id, number);
                     } else {
@@ -196,5 +197,5 @@ public class ImdbSeriesService implements SeriesService {
 
         return season;
     }
-            
+
 }

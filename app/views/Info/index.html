@@ -1,5 +1,5 @@
 #{extends 'main.html' /}
-<h1>Search series and display episodes by IMDB-series-id / TheTvDb.com Id</h1>
+<h1>Search series and display episodes by TheTvDb.com Id</h1>
 <hr class="soften">
 <div class="row">
     <div class="span4">
@@ -14,7 +14,6 @@
         <h3>Built On Reliable Technology</h3>
         <ul>
             <li><a href="http://www.playframework.org/">Play framework 1.2.4</a></li>
-            <li><a href="http://jsoup.org/">jsoup: Java HTML Parser</a></li>
         </ul>
     </div>
     <div class="span4">
@@ -30,23 +29,22 @@
         <h3>Search For TV-Series</h3>
         <p>
             <code>
-                http://series-ortiz.rhcloud.com/series?name=dexter        
+                http://series-ortiz.rhcloud.com/series?name=dexter
             </code>
         </p>
-        A search returns series information and a <i>IMDB-id</i> encapsulated by the <code>id</code> property or xml tag.
+        A search returns series information and an ID encapsulated by the <code>id</code> property or xml tag.
     </div>
 </div>
 <hr class="soften">
 <div class="row">
     <div class="span6">
         <h3>How To Work With The Search Result</h3>
-        Use the id to get additional tv-series information and seasons/episodes. The above query for the tv-series 
-        dexter returns the <i>IMDB-id</i> "<strong>tt0773262</strong>"
-        <div class="alert alert-info"><strong>Note</strong> Search results won't be cached and therefore searching can be slower than retrieving a tv-series directly by id</div>
-        <p>Now use the <i>IMDB-id</i> to get the storyline and the number of seasons:</p>
+        Use the id to get additional tv-series information and seasons/episodes. The above query for the tv-series
+        dexter returns the <i>ID</i> "<strong>79349</strong>"
+        <p>Now use the <i>ID</i> to get the storyline and the number of seasons:</p>
         <p>
             <code>
-                http://series-ortiz.rhcloud.com/series/tt0773262/info
+                http://series-ortiz.rhcloud.com/series/79349/info
             </code>
         </p>
         <p>
@@ -54,7 +52,7 @@
         </p>
         <p>
             <code>
-                http://series-ortiz.rhcloud.com/series/tt0773262/season/1
+                http://series-ortiz.rhcloud.com/series/79349/season/1
             </code>
         </p>
         <p>
@@ -62,15 +60,10 @@
         </p>
         <p>
             <code>
-                http://series-ortiz.rhcloud.com/series/tt0773262
+                http://series-ortiz.rhcloud.com/series/79349
             </code>
 
         </p>
-        <div class="alert alert-error">
-            <strong>Unstable</strong> Dependig on the number of seasons full series requests may take a bit to long. Openshift in connection with Play! seems to return a "502 Proxy Error"
-            if requests takes longer than ~30 seconds.
-            Try using the "<i>series-id</i>/season/<i>number</i>" URL instead
-        </div>
     </div>
     <div class="span6">
         <h3>Caching</h3>
@@ -82,7 +75,7 @@
         </p>
         <p>
             <code>
-                http://series-ortiz.rhcloud.com/series.xml?name=dexter       
+                http://series-ortiz.rhcloud.com/series.xml?name=dexter
             </code>
         </p>
         <p>
@@ -97,11 +90,3 @@
     </div>
 
 </div>
-
-<hr class="soften"/>
-
-<h1>TheTVDB.com Wrapper&nbsp;<span class="label label-info">New!</span></h1>
-The <i>IMDB Series API</i> does now support querying for <i>TheTVDB.com</i> entries. You only have to append <code>s=thetvdb</code> to the query string, to specify the service.
-<p>Example:
-<code>http://series-ortiz.rhcloud.com/series?name=dexter&callback=func&s=thetvdb</code>
-</p>

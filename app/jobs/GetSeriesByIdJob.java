@@ -23,24 +23,20 @@ public class GetSeriesByIdJob extends Job<Series> {
         this.id = id;
     }
 
+    @Deprecated
     public GetSeriesByIdJob(String id, String s) {
         this(id);
         service = s;
     }
-    
+
     @Override
     public Series doJobWithResult() {
         SeriesService service = getServiceImplementation();
         Series series = service.getSeriesById(id);
         return series;
     }
-    
+
     private SeriesService getServiceImplementation() {
-        if (service == null)
-            return new ImdbSeriesService();
-        else if (service.equals("thetvdb"))
-            return new TheTvDbSeriesService();
-        else
-            return new ImdbSeriesService();
+        return new TheTvDbSeriesService();
     }
 }

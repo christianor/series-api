@@ -16,51 +16,39 @@ import seriesServices.TheTvDbSeriesService;
 // import models.*;
 public class Application extends Controller {
 
-    // sucht anhand der query die imdb seite nach serien ergebnissen ab,
-    // dazu wird die ergebnis seite des such formulars geparst
-    public static void searchSeries(String name, String s) {
-        SeriesService service = getServiceImplementation(s);
+    public static void searchSeries(String name) {
+        SeriesService service = getServiceImplementation();
         List<Series> series = service.searchSeries(name);
 
         renderByFormat(request.format, series);
     }
 
-    public static void getSeriesById(String id, String s) {
-        
+    public static void getSeriesById(String id) {
 
-        Promise<Series> seriesPromise = new GetSeriesByIdJob(id, s).now();
+        Promise<Series> seriesPromise = new GetSeriesByIdJob(id).now();
         Series series = await(seriesPromise);
 
         renderByFormat(request.format, series);
     }
 
-    public static void getSeriesInfoById(String id, String s) {
-        SeriesService service = getServiceImplementation(s);
+    public static void getSeriesInfoById(String id) {
+        SeriesService service = getServiceImplementation();
         Series series = service.getSeriesInfo(id);
 
         renderByFormat(request.format, series);
     }
 
-    public static void getSeriesSeason(String id, int number, String s) {
-        SeriesService service = getServiceImplementation(s);
+    public static void getSeriesSeason(String id, int number) {
+        SeriesService service = getServiceImplementation();
         Season season = service.getSeason(id, number);
-        
+
         renderByFormat(request.format, season);
 
     }
 
     @Util
     private static SeriesService getServiceImplementation() {
-        return new ImdbSeriesService();
-    }
-
-    @Util
-    private static SeriesService getServiceImplementation(String service) {
-        if (service != null && service.equals("thetvdb")) {
-            return new TheTvDbSeriesService();
-        } else {
-            return getServiceImplementation();
-        }
+        return new TheTvDbSeriesService();
     }
 
     @Util
@@ -85,7 +73,7 @@ public class Application extends Controller {
         }
     }
 
-    
+
     @Deprecated
     @Util
     private static void savePopularity(String id, String service) {
