@@ -1,5 +1,4 @@
 IMDB Support has been discarded.
-Work with the "?s=thetvdb" - URL - Suffix to get the examples working.
 
 Search series and display episodes by IMDB-series-id / TheTvDb.com Id
 Supporting Multiple Formats
@@ -39,7 +38,3 @@ If you want to use the resulting data over JSONP just add a "callback" parameter
 http://series-ortiz.rhcloud.com/series?name=dexter&callback=func
 
 In this case func is the callback function.
-
-TheTVDB.com Wrapper New!
-The IMDB Series API does now support querying for TheTVDB.com entries. You only have to append s=thetvdb to the query string, to specify the service.
-Example: http://series-ortiz.rhcloud.com/series?name=dexter&callback=func&s=thetvdb
